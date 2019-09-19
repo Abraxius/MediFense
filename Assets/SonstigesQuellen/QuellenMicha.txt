@@ -1,0 +1,50 @@
+SOUNDS:
+soliloquy 
+https://opengameart.org/content/soliloquy
+
+ballista
+https://elements.envato.com/de/medieval-ballista-fire-bolt-BUQSGD3
+
+Monster dying
+https://freesound.org/people/Robinhood76/sounds/360337/
+
+Hero Death
+https://freesound.org/people/Artmasterrich/sounds/345456/
+
+Hero verletzt
+https://freesound.org/people/thecheeseman/sounds/44428/
+
+Enemy verletzt
+https://freesound.org/people/Michel88/sounds/76966/
+
+Money bekommen
+https://freesound.org/people/Deatlev/sounds/335962/
+
+Stone impact
+https://freesound.org/people/thanvannispen/sounds/29994/
+
+Brick Impact
+https://freesound.org/people/dslrguide/sounds/321478/
+
+Wet Impact
+https://freesound.org/people/original_sound/sounds/376818/
+
+FONT:
+JHM Beda Font
+https://www.dafont.com/jmh-beda.font?text=MEDIFENSE+Optionen
+
+BILDER:
+Altes Papier:
+https://de.pngtree.com/freepng/old-parchment_2142238.html
+
+Menü Hintergund:
+https://cdna.artstation.com/p/assets/images/images/010/915/940/large/jordon-lee-1tm.jpg?1526925747
+
+Impact png
+https://gregorianfoundation.org/adopt-a-scholar/impact-icon/
+
+Heal Png
+https://de.pngtree.com/so/heal-icon
+
+Teleport Png:
+https://www.iconfinder.com/icons/2897341/future_portal_technology_teleport_warp_icon

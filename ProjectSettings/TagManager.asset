@@ -3,7 +3,17 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Enemy
+  - Wall
+  - World
+  - Building
+  - MainBase
+  - Mine
+  - Environment
+  - Shop
+  - Bullet
+  - Enemy Path
   layers:
   - Default
   - TransparentFX
@@ -13,15 +23,15 @@ TagManager:
   - UI
   - 
   - 
+  - 2
+  - EnemyPath
+  - Water
+  - Buildground
   - 
   - 
   - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Environment
+  - PostProcessing
   - 
   - 
   - 
