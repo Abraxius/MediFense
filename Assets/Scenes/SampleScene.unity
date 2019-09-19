@@ -412,7 +412,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_text: "Bist du sicher das du dein Haupthaus f\xFCr XXXX ausbauen m\xF6chtest?\\n
+  m_text: "Bist du sicher das du dein Haupthaus f\xFCr 1000 Gold ausbauen m\xF6chtest?\\n
     \\n Folgende Boni's werden freigeschaltet: \\n 1. Der Boss Loot wird um weitere
     2 Gen erh\xF6t. \\n 2. Die Minenproduktion wird um weitere 2 erh\xF6t. \\n 3.
     Die Steuern werden um weitere 0.03 erh\xF6t."
@@ -8905,7 +8905,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_text: "Bist du sicher das du dein Haupthaus f\xFCr XXXX ausbauen m\xF6chtest?\\n
+  m_text: "Bist du sicher das du dein Haupthaus f\xFCr 500 Gold ausbauen m\xF6chtest?\\n
     \\n Folgende Boni's werden freigeschaltet: \\n 1. Der Boss Loot wird um 1 Gen
     erh\xF6t. \\n 2. Die Minenproduktion wird um 1 erh\xF6t. \\n 3. Du erh\xE4lst
     konstante Steuern im Wert von 0.02."

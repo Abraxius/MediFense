@@ -83,8 +83,8 @@ public class Haupthaus : MonoBehaviour
                 {
                     dataStorage.money -= dataStorage.dritteAusbaustufe;
                     ausbaustufeHaupthaus += 1;
-                    ausbauStufe2.SetActive(false);
-                    ausbauStufe3.SetActive(true);
+                    ausbauText2.SetActive(false);
+                    ausbauText3.SetActive(true);
                     //Bonuse die Verfügbar werden:
                     dataStorage.enemyBossLoot += 2;
                     dataStorage.abbauRate += 2;
