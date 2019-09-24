@@ -212,7 +212,7 @@ public class EnemyBoss : MonoBehaviour
             {
                 if (animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 2)
                 {
-                    dataStorage.money += dataStorage.enemyBossLoot;
+                    dataStorage.gen += dataStorage.enemyBossLoot;
                     animator.SetBool("death", false);
                     EnemySpawn.EnemyListe.Remove(this.gameObject);
                     Destroy(this.gameObject);

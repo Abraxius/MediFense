@@ -72,16 +72,25 @@ public class SkillTree : MonoBehaviour
         {
             spielerDamageX2Button.GetComponent<Image>().color = new Color(1, 1, 1, 0.5f);
             spielerDamageX2Bool = true;
+        } else
+        {
+            PlayerPrefs.SetInt("spielerDamageX2", 1);
         }
         if (spielerHpX2 == 2)
         {
             spielerHpX2Button.GetComponent<Image>().color = new Color(1, 1, 1, 0.5f);
             spielerHpX2Bool = true;
+        } else
+        {
+            PlayerPrefs.SetInt("spielerHpX2", 1);
         }
         if (towerDamageX2 == 2)
         {
             towerDamageX2Button.GetComponent<Image>().color = new Color(1, 1, 1, 0.5f);
             towerDamageX2Bool = true;
+        } else
+        {
+            PlayerPrefs.SetInt("towerDamageX2", 1);
         }
 
         if (damageSkill == 1)
@@ -128,6 +137,9 @@ public class SkillTree : MonoBehaviour
             Debug.Log("Wurde erhöt");
             dataStorage.gen -= dataStorage.spielerHpX2Kosten;
             spielerHpX2Bool = true;
+            //Damit die HP nach Upgraden gleich auf Max ist
+            dataStorage.playerHpMax = dataStorage.playerHpStart + PlayerPrefs.GetInt("spielerHpPlusSave") * PlayerPrefs.GetInt("spielerHpX2");
+            dataStorage.playerHp = dataStorage.playerHpMax;
         }
         else
         {
@@ -159,6 +171,9 @@ public class SkillTree : MonoBehaviour
             PlayerPrefs.SetInt("spielerHpPlusSave", spielerHpPlus);
             Debug.Log("Wurde erhöt");
             dataStorage.gen -= dataStorage.spielerHpPlusKosten;
+            //Damit die HP nach Upgraden gleich auf Max ist
+            dataStorage.playerHpMax = dataStorage.playerHpStart + PlayerPrefs.GetInt("spielerHpPlusSave") * PlayerPrefs.GetInt("spielerHpX2");
+            dataStorage.playerHp = dataStorage.playerHpMax;
             }
             else
             {

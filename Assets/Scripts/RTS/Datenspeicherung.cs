@@ -57,7 +57,7 @@ public class Datenspeicherung : MonoBehaviour
 
     public string ALLGEMEINEWERTE = "-------------------------------------------------";
     //Allgemein Werte--------------------------------------------------
-    public int welle = 1;       
+    public int welle = 0;       
     public float money = 100f;       //Gold
     public int gen = 0;         //Erze
     public int schwierigkeitsgrad = 1;      //um wieviel sollen die Einheiten stärker werden?
@@ -126,7 +126,7 @@ public class Datenspeicherung : MonoBehaviour
 
         gen = PlayerPrefs.GetInt("Rubine");    
 
-        welle = 1;
+        welle = 0;
         playerHpMax = playerHpStart + PlayerPrefs.GetInt("spielerHpPlusSave") * PlayerPrefs.GetInt("spielerHpX2");
 
         //Player

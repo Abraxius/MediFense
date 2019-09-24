@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class EnemySpawn : MonoBehaviour
 {
@@ -23,6 +24,8 @@ public class EnemySpawn : MonoBehaviour
     private bool wellenStart;
     public List<GameObject> EnemyListe = new List<GameObject>();
 
+    public Text wellenCountdownText;
+
     private Datenspeicherung dataStorage;
 
     //Spawn soll hinten Spawnen
@@ -34,7 +37,7 @@ public class EnemySpawn : MonoBehaviour
         standort = this.transform.position;
         spawnZeit = skelettSpawnZeit;
         countdown = spawnZeit;
-        wellenStart = true;
+        wellenStart = false;
         wellenCountdownP = wellenCountdown;
     }
 
@@ -121,9 +124,15 @@ public class EnemySpawn : MonoBehaviour
             {
                 if (EnemyListe.Count < 1)
                 {
+                    //aktiviert den WellenCountdown (visuellen)
+                    wellenCountdownText.enabled = true;
+                    int tmp = (int)wellenCountdown;
+                    wellenCountdownText.text = tmp.ToString();
+
                     wellenCountdown -= Time.deltaTime;
                     if (wellenCountdown < 0.0f)
                     {
+                        wellenCountdownText.enabled = false; //deaktiviert den visuellen Wellencountdown
                         dataStorage.welle += 1;
 
                         //Hier wird der Schwierigkeitsgrad der Enemys pro Welleneinheit erhöt, siehe Datenspeicherung

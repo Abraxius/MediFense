@@ -107,7 +107,6 @@ public class HydraTower : MonoBehaviour
                     }
                     timer = 0f;
                     animator.SetBool("Attack", false);
-                    Debug.Log("Schuss gemacht");
                 }
             }
 

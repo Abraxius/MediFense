@@ -37,7 +37,6 @@ public class TowerBuild : MonoBehaviour
     {
         interneTurmNr = 1;
         buildable = true;
-        //Debug.Log("buildable wird true gesetzt");
         dataStorage = GameObject.Find("Player").GetComponent<Datenspeicherung>();
         movement = GameObject.Find("Player").transform.GetChild(1).GetComponent<PlayerController>();
     }
@@ -211,7 +210,6 @@ public class TowerBuild : MonoBehaviour
         {
             GameObject tmp;
             tmp = TowerBaureihenfolge.Find(x => x.gameObject);
-            Debug.Log(tmp);
             movement.agent.SetDestination(tmp.transform.position);
             movement.enabled = false;
             bautGerade = true;

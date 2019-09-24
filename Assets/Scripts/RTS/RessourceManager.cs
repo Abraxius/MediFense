@@ -14,7 +14,7 @@ namespace RTS
 
         public static int ScrollWidth { get { return 15; } }            //Scrollbereich am Rand            
 
-        public static float MinCameraHeight { get { return 15.0f; } }    //min Kamera Höhe
+        public static float MinCameraHeight { get { return 5.0f; } }    //min Kamera Höhe
         public static float MaxCameraHeight { get { return 50.0f; } }   //max Kamera Höhe
 
         public static float MinCameraWidth { get { return -80.0f; } }

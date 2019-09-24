@@ -67,6 +67,7 @@
     <Compile Include="Assets\Scripts\Audio\BtnFX.cs" />
     <Compile Include="Assets\Scripts\Audio\Sound.cs" />
     <Compile Include="Assets\Scripts\Buildings\Arrow.cs" />
+    <Compile Include="Assets\Scripts\Buildings\BuildingCanvasRotation.cs" />
     <Compile Include="Assets\Scripts\Buildings\FireballHit.cs" />
     <Compile Include="Assets\Scripts\Buildings\Haupthaus.cs" />
     <Compile Include="Assets\Scripts\Buildings\HydraTower.cs" />
@@ -104,6 +105,7 @@
     <Compile Include="Assets\Scripts\UI\HPLeisteEnemy2.cs" />
     <Compile Include="Assets\Scripts\UI\HPLeisteEnemyBoss.cs" />
     <Compile Include="Assets\Scripts\UI\HPLeisteSpieler.cs" />
+    <Compile Include="Assets\Scripts\UI\MinimapScript.cs" />
     <Compile Include="Assets\Scripts\UI\UI.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01_UGUI.cs" />
