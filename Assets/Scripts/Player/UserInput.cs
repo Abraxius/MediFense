@@ -13,6 +13,9 @@ public class UserInput : MonoBehaviour
     //Pausemenü
     private Datenspeicherung dataStorage;
 
+    //Charakter Sprung
+    private GameObject player;
+
     private bool kameraFreeze;
     public SphereCollider col1;
     public SphereCollider col2;
@@ -20,6 +23,7 @@ public class UserInput : MonoBehaviour
     private void Start()
     {
         dataStorage = GameObject.Find("Player").GetComponent<Datenspeicherung>();
+        player = GameObject.Find("Player").transform.GetChild(1).gameObject;
     }
 
     void Update()
@@ -42,6 +46,12 @@ public class UserInput : MonoBehaviour
         {
             col1.enabled = true;
             col2.enabled = true;
+
+            if (Input.GetKey(KeyCode.V))    //Zum Charakter springen mit der Kamera
+            {
+                Camera.main.transform.position = player.transform.position + new Vector3(-10f, 10f, 0f);
+                Camera.main.transform.rotation = Quaternion.Euler(45f, 90f, 0f);
+            }
 
             if (Input.GetMouseButtonDown(2))    //Legt Die Koordinaten fest beim Klicken des Mausrades um zu wissen wohin er sich bewegen soll
             {

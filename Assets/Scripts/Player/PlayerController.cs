@@ -72,7 +72,7 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-
+        //Skills------------------------------------------------------------
         // Cooldowns
         timeSinceAction1 += Time.deltaTime;
         timeSinceAction2 += Time.deltaTime;
@@ -107,10 +107,8 @@ public class PlayerController : MonoBehaviour
             }
             else CooldownPanelS3.SetActive(false);
         }
-
-
-
-        if (dataStorage.pauseButton == false)
+            //-Steuerung----------------------------------------------------------------------
+            if (dataStorage.pauseButton == false)
         {
             agent.enabled = true;
 
@@ -180,6 +178,7 @@ public class PlayerController : MonoBehaviour
         {
             agent.enabled = false;
         }
+        //-------------------------------------------------------------------------------
     }
     private void OnTriggerStay(Collider collisionInfo)      //Baustelle
     {
