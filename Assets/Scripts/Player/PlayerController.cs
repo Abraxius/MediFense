@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class PlayerController : MonoBehaviour
 {
@@ -47,6 +49,10 @@ public class PlayerController : MonoBehaviour
 
     public GameObject clickAnimation;
 
+    //Um sicherzustellen, dass er nicht läuft wenn man das UI anklickt
+    public GraphicRaycaster m_Raycaster;
+    public PointerEventData m_PointerEventData;
+    public EventSystem m_EventSystem;
 
     private void Start()
     {
@@ -67,7 +73,6 @@ public class PlayerController : MonoBehaviour
         timeSinceAction1 = 15f;
         timeSinceAction2 = 120f;
         timeSinceAction3 = 60f;
-
     }
 
     void Update()
@@ -116,32 +121,51 @@ public class PlayerController : MonoBehaviour
             {
                 Ray ray = cam.ScreenPointToRay(Input.mousePosition);    //wo haben wir hingeklickt
                 RaycastHit hit; //was haben wir angeklickt
-
+                
                 if (dataStorage.playerDied == false)
                 {
-                    if (Physics.Raycast(ray, out hit))
+                    //Set up the new Pointer Event
+                    m_PointerEventData = new PointerEventData(m_EventSystem);
+                    //Set the Pointer Event Position to that of the mouse position
+                    m_PointerEventData.position = Input.mousePosition;
+
+                    //Create a list of Raycast Results
+                    List<RaycastResult> results = new List<RaycastResult>();
+
+                    //Raycast using the Graphics Raycaster and mouse click position
+                    m_Raycaster.Raycast(m_PointerEventData, results);
+
+                    results.Remove(results.Find(x => x.gameObject.name == "GamePanel")); //Löscht alle GamePanel treffer aus der Liste
+                    if (results.Count < 1) //Guckt ob etwas vom UI angeklickt wurde (Außer das GamePanel) Wenn Ja, darf er laufen, wenn Nein, darf er nicht
                     {
-                        if (hit.transform.gameObject.tag == "MainBase")
+                        if (Physics.Raycast(ray, out hit))
                         {
-                            //Debug.Log("Haupthaus angeklickt");
-                            agent.SetDestination(mainBaseTriggerPoint.transform.position);
-                        }
-                        else if (hit.transform.gameObject.tag == "Mine")
-                        {
-                            agent.SetDestination(mineTriggerPoint.transform.position);
-                        }
-                        else if (hit.transform.gameObject.tag == "Shop")
-                        {
-                            agent.SetDestination(shopTriggerPoint.transform.position);
-                        }
-                        else
-                        {
-                            //Lässt den Character laufen und startet die Klickanimation
-                            clickAnimation.transform.position = hit.point;
-                            clickAnimation.GetComponent<ClickAnimation>().abspielen = true;
-                            clickAnimation.GetComponent<ClickAnimation>().timer = 0;
-                            clickAnimation.GetComponent<ClickAnimation>().particle.Play(true);
-                            agent.SetDestination(hit.point);
+                            if (hit.transform.gameObject.layer == 5)
+                            {
+                                Debug.Log("UI angeklickt");
+                            }
+                            if (hit.transform.gameObject.tag == "MainBase")
+                            {
+                                //Debug.Log("Haupthaus angeklickt");
+                                agent.SetDestination(mainBaseTriggerPoint.transform.position);
+                            }
+                            else if (hit.transform.gameObject.tag == "Mine")
+                            {
+                                agent.SetDestination(mineTriggerPoint.transform.position);
+                            }
+                            else if (hit.transform.gameObject.tag == "Shop")
+                            {
+                                agent.SetDestination(shopTriggerPoint.transform.position);
+                            }
+                            else
+                            {
+                                //Lässt den Character laufen und startet die Klickanimation
+                                clickAnimation.transform.position = hit.point;
+                                clickAnimation.GetComponent<ClickAnimation>().abspielen = true;
+                                clickAnimation.GetComponent<ClickAnimation>().timer = 0;
+                                clickAnimation.GetComponent<ClickAnimation>().particle.Play(true);
+                                agent.SetDestination(hit.point);
+                            }
                         }
                     }
                 }
@@ -150,29 +174,18 @@ public class PlayerController : MonoBehaviour
             died(); //Sterbe Abfrage
 
             //Die Fähigkeiten des Charakters
-            if (Input.GetKeyDown(KeyCode.Alpha3) && timeSinceAction1 > actionCooldown1 && PlayerPrefs.GetInt("damageSkill") == 1)
+            if (Input.GetKeyDown(KeyCode.Alpha3))
             {
-                agent.SetDestination(this.transform.position);
-                animator.SetTrigger("SmashTime");
-                Instantiate(Skill1, this.transform.position, Quaternion.identity);
-
-                timeSinceAction1 = 0f;
+                DamageSkill();
             }
-            else if (Input.GetKeyDown(KeyCode.Alpha4) && timeSinceAction2 > actionCooldown2 && PlayerPrefs.GetInt("healSkill") == 1)
-            {
-                agent.SetDestination(this.transform.position);
-                animator.SetTrigger("SmashTime");
-                Instantiate(Skill2, this.transform.position, Quaternion.identity);
 
-                timeSinceAction2 = 0f;
+            else if (Input.GetKeyDown(KeyCode.Alpha4))
+            {
+                HealSkill();
             }
-            else if (Input.GetKeyDown(KeyCode.Alpha5) && timeSinceAction3 > actionCooldown3 && PlayerPrefs.GetInt("portSkill") == 1)
+            else if (Input.GetKeyDown(KeyCode.Alpha5))
             {
-                agent.SetDestination(this.transform.position);
-                animator.SetTrigger("SmashTime");
-                Instantiate(Skill3, this.transform.position, Quaternion.identity);
-
-                timeSinceAction3 = 0f;
+                PortSkill();
             }
         } else
         {
@@ -248,4 +261,39 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void DamageSkill()
+    {
+        if(timeSinceAction1 > actionCooldown1 && PlayerPrefs.GetInt("damageSkill") == 1)
+            {
+            agent.SetDestination(this.transform.position);
+            animator.SetTrigger("SmashTime");
+            Instantiate(Skill1, this.transform.position, Quaternion.identity);
+
+            timeSinceAction1 = 0f;
+        }
+    }
+
+    public void HealSkill()
+    {
+        if (timeSinceAction2 > actionCooldown2 && PlayerPrefs.GetInt("healSkill") == 1)
+        {
+            agent.SetDestination(this.transform.position);
+            animator.SetTrigger("SmashTime");
+            Instantiate(Skill2, this.transform.position, Quaternion.identity);
+
+            timeSinceAction2 = 0f;
+        }
+    }
+
+    public void PortSkill()
+    {
+        if (timeSinceAction3 > actionCooldown3 && PlayerPrefs.GetInt("portSkill") == 1)
+        {
+            agent.SetDestination(this.transform.position);
+            animator.SetTrigger("SmashTime");
+            Instantiate(Skill3, this.transform.position, Quaternion.identity);
+
+            timeSinceAction3 = 0f;
+        }
+    }
 }

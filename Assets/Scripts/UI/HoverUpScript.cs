@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class HoverUpScript : MonoBehaviour
 {
@@ -21,6 +23,7 @@ public class HoverUpScript : MonoBehaviour
     {
         Ray rayHover = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hover;
+
         if (Physics.Raycast(rayHover, out hover))
         {
             if (hover.transform.gameObject.tag == "MainBase" || hover.transform.gameObject.tag == "Mine" || hover.transform.gameObject.tag == "Shop")
@@ -28,6 +31,8 @@ public class HoverUpScript : MonoBehaviour
                 transform.position = hover.point;
                 transform.rotation = Camera.main.transform.rotation;
                 transform.GetChild(0).gameObject.SetActive(true);
+            } else if (hover.transform.gameObject.layer == 5) {
+                Debug.Log("UI");
             }
             else
             {

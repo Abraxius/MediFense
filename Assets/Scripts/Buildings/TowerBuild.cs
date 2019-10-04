@@ -47,23 +47,7 @@ public class TowerBuild : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Alpha0 +1 + i)) //es wird zB 1 gedrückt
             {
-                if (PressedKeyOfCurrentPrefab(i)) //ist der tastenauswahl auch ein Turm zugewiesen?
-                {
-                    Destroy(currentPlaceableObject);    //Nein? dann zerstör es
-                    Destroy(aktuellesRechteck);
-                    currentindex = -1;
-                } else
-                {
-                    if (currentPlaceableObject != null)
-                    {
-                        Destroy(currentPlaceableObject);
-                        Destroy(aktuellesRechteck); 
-                    }
-
-                    currentPlaceableObject = Instantiate(TowerPrefabs[i]);
-                    aktuellesRechteck = Instantiate(Sperrzone); //Test
-                    currentindex = i;
-                }
+                TurmBauen(i); 
                 break;
             }
         }
@@ -213,6 +197,28 @@ public class TowerBuild : MonoBehaviour
             movement.agent.SetDestination(tmp.transform.position);
             movement.enabled = false;
             bautGerade = true;
+        }
+    }
+
+    public void TurmBauen(int i)
+    {
+        if (PressedKeyOfCurrentPrefab(i)) //ist der tastenauswahl auch ein Turm zugewiesen?
+        {
+            Destroy(currentPlaceableObject);    //Nein? dann zerstör es
+            Destroy(aktuellesRechteck);
+            currentindex = -1;
+        }
+        else
+        {
+            if (currentPlaceableObject != null)
+            {
+                Destroy(currentPlaceableObject);
+                Destroy(aktuellesRechteck);
+            }
+
+            currentPlaceableObject = Instantiate(TowerPrefabs[i]);
+            aktuellesRechteck = Instantiate(Sperrzone); //Test
+            currentindex = i;
         }
     }
 }
