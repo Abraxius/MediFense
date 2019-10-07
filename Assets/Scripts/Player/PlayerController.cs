@@ -40,9 +40,11 @@ public class PlayerController : MonoBehaviour
     float actionCooldown3;
     float timeSinceAction3;
 
-    public GameObject CooldownPanelS1;
-    public GameObject CooldownPanelS2;
-    public GameObject CooldownPanelS3;
+    public Image CooldownPanelS1;
+    public Image CooldownPanelS2;
+    public Image CooldownPanelS3;
+
+    public GameObject CooldownBlink1;
 
     private bool SoundUsed;
 
@@ -68,18 +70,19 @@ public class PlayerController : MonoBehaviour
         actionCooldown2 = 120f;
         actionCooldown3 = 60f;
 
-        timeSinceAction1 = 15f;
-        timeSinceAction2 = 120f;
-        timeSinceAction3 = 60f;
+        timeSinceAction1 = 0f;
+        timeSinceAction2 = 0f;
+        timeSinceAction3 = 0f;
     }
 
     void Update()
     {
         //Skills------------------------------------------------------------
         // Cooldowns
-        timeSinceAction1 += Time.deltaTime;
-        timeSinceAction2 += Time.deltaTime;
-        timeSinceAction3 += Time.deltaTime;
+        timeSinceAction1 -= Time.deltaTime;
+
+        timeSinceAction2 -= Time.deltaTime;
+        timeSinceAction3 -= Time.deltaTime;
 
 
         damageSkill = PlayerPrefs.GetInt("damageSkill", damageSkill);
@@ -88,27 +91,23 @@ public class PlayerController : MonoBehaviour
         // Cooldown Panel
         if (damageSkill == 1) // wenn gekauft
         {
-            if (timeSinceAction1 < actionCooldown1)
+            CooldownPanelS1.fillAmount = (float)timeSinceAction1 / (float)actionCooldown1;
+            if (timeSinceAction1 < 0.15 && timeSinceAction1 > -0.95)
             {
-                CooldownPanelS1.SetActive(true);
+                //CooldownBlink1.SetActive(true);
             }
-            else CooldownPanelS1.SetActive(false);
+            else
+            {
+                //CooldownBlink1.SetActive(false);
+            }
         }
 
-        if (healSkill == 1) { 
-            if (timeSinceAction2 < actionCooldown2)
-            {
-                CooldownPanelS2.SetActive(true);
-            }
-            else CooldownPanelS2.SetActive(false);
+        if (healSkill == 1) {
+            CooldownPanelS2.fillAmount = (float)timeSinceAction2 / (float)actionCooldown2;
         }
 
-        if(portSkill == 1) { 
-            if (timeSinceAction3 < actionCooldown3)
-            {
-                CooldownPanelS3.SetActive(true);
-            }
-            else CooldownPanelS3.SetActive(false);
+        if(portSkill == 1) {
+            CooldownPanelS3.fillAmount = (float)timeSinceAction3 / (float)actionCooldown3;
         }
             //-Steuerung----------------------------------------------------------------------
             if (dataStorage.pauseButton == false)
@@ -261,37 +260,37 @@ public class PlayerController : MonoBehaviour
 
     public void DamageSkill()
     {
-        if(timeSinceAction1 > actionCooldown1 && PlayerPrefs.GetInt("damageSkill") == 1)
-            {
+        if(timeSinceAction1 < 0 && PlayerPrefs.GetInt("damageSkill") == 1)
+        {
             agent.SetDestination(this.transform.position);
             animator.SetTrigger("SmashTime");
             Instantiate(Skill1, this.transform.position, Quaternion.identity);
 
-            timeSinceAction1 = 0f;
+            timeSinceAction1 = actionCooldown1;
         }
     }
 
     public void HealSkill()
     {
-        if (timeSinceAction2 > actionCooldown2 && PlayerPrefs.GetInt("healSkill") == 1)
+        if (timeSinceAction2 < 0 && PlayerPrefs.GetInt("healSkill") == 1)
         {
             agent.SetDestination(this.transform.position);
             animator.SetTrigger("SmashTime");
             Instantiate(Skill2, this.transform.position, Quaternion.identity);
 
-            timeSinceAction2 = 0f;
+            timeSinceAction2 = actionCooldown2;
         }
     }
 
     public void PortSkill()
     {
-        if (timeSinceAction3 > actionCooldown3 && PlayerPrefs.GetInt("portSkill") == 1)
+        if (timeSinceAction3 < 0 && PlayerPrefs.GetInt("portSkill") == 1)
         {
             agent.SetDestination(this.transform.position);
             animator.SetTrigger("SmashTime");
             Instantiate(Skill3, this.transform.position, Quaternion.identity);
 
-            timeSinceAction3 = 0f;
+            timeSinceAction3 = actionCooldown3;
         }
     }
 }
