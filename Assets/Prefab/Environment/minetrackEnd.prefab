@@ -297,7 +297,7 @@ GameObject:
   - component: {fileID: 5212298854517129322}
   m_Layer: 15
   m_Name: minetrackEnd
-  m_TagString: Untagged
+  m_TagString: Environment
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

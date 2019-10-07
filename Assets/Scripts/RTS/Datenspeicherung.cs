@@ -129,8 +129,6 @@ public class Datenspeicherung : MonoBehaviour
         welle = 0;
         playerHpMax = playerHpStart + PlayerPrefs.GetInt("spielerHpPlusSave") * PlayerPrefs.GetInt("spielerHpX2");
 
-        //Player
-        spawnPoint = new Vector3((-6.02f+33.97f), (17.53f+0.37f), (99.65f-4.69f));
         playerHp = playerHpMax;
 
         //pause

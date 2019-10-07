@@ -16,7 +16,6 @@ public class PlayerController : MonoBehaviour
     private Animator animator;
 
     private float beatTime;  //Die Zeit zwischen denen beim Schlagen des Enemys pause ist
-    private int damage;       //Der Schaden den der Enemy verursacht
 
     public float countdown;
 
@@ -60,7 +59,6 @@ public class PlayerController : MonoBehaviour
         cam = Camera.main;
 
         beatTime = dataStorage.beatTimePlayer;
-        damage = dataStorage.damagePlayer;
 
         animator = GetComponent<Animator>();
 
@@ -210,7 +208,7 @@ public class PlayerController : MonoBehaviour
                     //collisionInfo.transform.position += Vector3.up;    //an dieser Stelle die Schadens animation des Helden einfügen
                     try
                     {
-                    collisionInfo.gameObject.GetComponent<Enemy>().enemyHp -= damage;
+                    collisionInfo.gameObject.GetComponent<Enemy>().enemyHp -= dataStorage.damagePlayer;
                     } catch
                     {
                         tmp = true;
@@ -218,7 +216,7 @@ public class PlayerController : MonoBehaviour
 
                     if (tmp == true)
                     {
-                        collisionInfo.gameObject.GetComponent<Enemy_Golem>().enemyHp -= damage;
+                        collisionInfo.gameObject.GetComponent<Enemy_Golem>().enemyHp -= dataStorage.damagePlayer;
                     }
 
                     FindObjectOfType<AudioManager>().Play("MonsterHurtFX");

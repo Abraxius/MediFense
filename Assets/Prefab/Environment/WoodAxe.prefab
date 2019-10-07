@@ -91,7 +91,7 @@ GameObject:
   - component: {fileID: 3769273900551518596}
   m_Layer: 15
   m_Name: WoodAxe
-  m_TagString: Untagged
+  m_TagString: Environment
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

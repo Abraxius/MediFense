@@ -129,6 +129,12 @@ public class EnemySpawn : MonoBehaviour
                     int tmp = (int)wellenCountdown;
                     wellenCountdownText.text = tmp.ToString();
 
+                    //Abfrage, falls die Welle durch 5 teilbar ist, gibt es einen Rubin, && wellenStart == true, damit man ihn am Ende bekommt
+                    if (dataStorage.welle % 5 == 0 && wellenStart == true)
+                    {
+                        dataStorage.gen += 1;
+                    }
+
                     wellenCountdown -= Time.deltaTime;
                     if (wellenCountdown < 0.0f)
                     {
