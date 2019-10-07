@@ -30,6 +30,8 @@ public class EnemySpawn : MonoBehaviour
 
     //Spawn soll hinten Spawnen
     private bool bossSpawn = true;
+
+    public bool spielStart = false; // bool wird in StartPause.cs auf true gesetzt, sobald die erste Welle gestartet werden soll
     // Start is called before the first frame update
     void Start()
     {
@@ -122,7 +124,7 @@ public class EnemySpawn : MonoBehaviour
             }
             else //countdown bis die nächste welle beginnt
             {
-                if (EnemyListe.Count < 1)
+                if (EnemyListe.Count < 1 && spielStart == true)
                 {
                     //aktiviert den WellenCountdown (visuellen)
                     wellenCountdownText.enabled = true;

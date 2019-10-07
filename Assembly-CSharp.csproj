@@ -101,6 +101,7 @@
     <Compile Include="Assets\Scripts\RTS\Datenspeicherung.cs" />
     <Compile Include="Assets\Scripts\RTS\RessourceManager.cs" />
     <Compile Include="Assets\Scripts\UI\ButtonControl.cs" />
+    <Compile Include="Assets\Scripts\UI\ButtonHover.cs" />
     <Compile Include="Assets\Scripts\UI\HoverUpScript.cs" />
     <Compile Include="Assets\Scripts\UI\HPLeisteEnemy.cs" />
     <Compile Include="Assets\Scripts\UI\HPLeisteEnemy2.cs" />

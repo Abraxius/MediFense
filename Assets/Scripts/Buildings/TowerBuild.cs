@@ -161,6 +161,13 @@ public class TowerBuild : MonoBehaviour
                 currentPlaceableObject.GetComponent<Collider>().enabled = true;
             }*/
         }
+
+        if (Input.GetMouseButtonDown(1)) //Bei rechtsklick bauen abbrechen
+        {
+            Destroy(currentPlaceableObject);    //Nein? dann zerstör es
+            Destroy(aktuellesRechteck);
+            currentindex = -1;
+        }
     }
 
     private void RotateTower() // Rotation
