@@ -29,7 +29,7 @@ public class ButtonHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
 
     void Update()
     {
-        Debug.Log(Input.mousePosition);
+        //Debug.Log(Input.mousePosition);
         if (fensterSpeicher != null)
         {
             fensterSpeicher.transform.position = Input.mousePosition + new Vector3(90, 55, 0);

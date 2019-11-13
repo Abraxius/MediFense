@@ -276,7 +276,6 @@ GameObject:
   - component: {fileID: 3035743221572770145}
   - component: {fileID: 3035743221572770146}
   - component: {fileID: 3035743221572770147}
-  - component: {fileID: 5989164043100697244}
   m_Layer: 0
   m_Name: Enemy 1
   m_TagString: Enemy
@@ -357,7 +356,7 @@ CapsuleCollider:
   m_Radius: 0.5
   m_Height: 2
   m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: -0.1, z: 0}
 --- !u!54 &3035743221572770145
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -408,6 +407,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e5ebddffd3f98741a2f72315450dacd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemyPath: {fileID: 4608933299390756016, guid: b7554d5912d2244438117f202a740101,
+    type: 3}
+  waypointTolerance: 1
+  waypointDwellTime: 0.5
   agent: {fileID: 3035743221572770146}
   ziel: {fileID: 4830162858441184962, guid: 20ea8061104b35c4ea6dc3149c0c0b96, type: 3}
   col: {fileID: 3035743221572770144}
@@ -420,22 +423,9 @@ MonoBehaviour:
   sterben: 0
   tmpID: 0
   onTheRoad: 0
-  colTrigger: {fileID: 5989164043100697244}
+  colTrigger: {fileID: 0}
   tmpLocation: {x: 0, y: 0, z: 0}
   brucke: {fileID: 4567918143800536339, guid: 1a1bc5a0fcf4ec848886f3ccc54cd6da, type: 3}
---- !u!65 &5989164043100697244
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3035743221572770156}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.3, y: 0.5, z: 0.3}
-  m_Center: {x: 0, y: -1.1, z: 0}
 --- !u!1001 &558075234855416314
 PrefabInstance:
   m_ObjectHideFlags: 0

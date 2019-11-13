@@ -7,63 +7,52 @@ using UnityEngine.SceneManagement; // WICHTIG FÜR SZENENWECHSEL
 
 public class Enemy : MonoBehaviour
 {
+    [SerializeField] EnemyPath enemyPath; //Muss in der Szene verknüft werden, da der Pfad in der Szene existiert
+    [SerializeField] float waypointTolerance = 10f; //Abweichung zum Wegpunkt Toleranz
+
+    Vector3 guardPosition;
+    int currentWaypointIndex = 0;
 
     public NavMeshAgent agent;
-    public GameObject ziel;
-    private Vector3 zielVector;
-    public Collider col;
 
     private EnemySpawn EnemySpawn;
     private Datenspeicherung dataStorage;
     private GameObject player;
 
     Animator animator;
-    NavMeshAgent navAgent;
     const float locomotionAnimationSmoothTime = .1f;
 
     public float beatTime;  //Die Zeit zwischen denen beim Schlagen des Enemys pause ist
     public int damage;       //Der Schaden den der Enemy verursacht
 
-    public float countdown;
-    public bool playerCollision;
+    [HideInInspector] public float countdown;
+    [HideInInspector] public bool playerCollision;
 
     public int enemyHp;
-    public int startetEnemyHP;
+    [HideInInspector] public int startetEnemyHP;
 
-    public bool sterben;
-    public int tmpID;
-    public bool onTheRoad;
-    public BoxCollider colTrigger;
-    public Vector3 tmpLocation;
+    [HideInInspector] public bool sterben;
 
     private bool SoundUsed;
 
-    public GameObject brucke;
-    // Start is called before the first frame update
     void Start()
     {
-        tmpID = agent.agentTypeID;  //speichert die ID des Agents ab um Sie in der Update zurück zu ändern
-        onTheRoad = true;
-
-        //ziel = GameObject.Find("EnemyZiel");
-        zielVector = ziel.transform.position;
         dataStorage = GameObject.Find("Player").GetComponent<Datenspeicherung>();
         player = GameObject.Find("Player").gameObject.transform.GetChild(1).gameObject;
         EnemySpawn = GameObject.Find("EnemySpawn").GetComponent<EnemySpawn>();
 
         animator = GetComponentInChildren<Animator>();
 
-        damage = dataStorage.enemyDamage1;
-        beatTime = dataStorage.enemyBeatTime1;
-        enemyHp = dataStorage.enemy1Hp;         //Das muss noch für mehrere Enemys erweitert werden!!!
-        startetEnemyHP = dataStorage.enemy1Hp;
+        //damage = dataStorage.enemyDamage1;
+        //beatTime = dataStorage.enemyBeatTime1;
+        //enemyHp = dataStorage.enemy1Hp;         //Das muss noch für mehrere Enemys erweitert werden!!!
+        startetEnemyHP = enemyHp;
 
         countdown = beatTime;
 
         SoundUsed = false;
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (dataStorage.pauseButton == false)
@@ -86,27 +75,11 @@ public class Enemy : MonoBehaviour
 
                 if (Vector3.Distance(this.transform.position, player.transform.position) < 5 && dataStorage.playerDied == false)  //Spieler in der Nähe
                 {
-                    agent.agentTypeID = 0;  //0 = Humanoid
-                    if (onTheRoad == true)
-                    {
-                        tmpLocation = this.transform.position;
-                    }
-
                     nearHero();
                 }
                 else  //Spieler nicht in der Nähe
                 {
-                    if (onTheRoad == false)
-                    {
-                        colTrigger.size = new Vector3(0.5f, 0.5f, 0.5f);
-                        agent.SetDestination(tmpLocation);
-                    }
-                    else
-                    {
-                        agent.SetDestination(zielVector);
-                        agent.agentTypeID = tmpID;  //alte ID*/
-                    }
-
+                    PfadVerfolgen();
                 }
             }
             else
@@ -119,6 +92,38 @@ public class Enemy : MonoBehaviour
         }
     }
 
+    private void PfadVerfolgen()
+    {
+        Vector3 nextPosition = guardPosition;   //guardPosition ist default
+
+        if (enemyPath != null)
+        {
+            if (AtWaypoint())
+            {
+                CycleWaypoint();
+            }
+            nextPosition = GetCurrentWaypoint();
+        }
+        agent.SetDestination(nextPosition); //geht an die vorgesehene Position                                                         
+
+    }
+
+    private bool AtWaypoint()   //gibt an ob noch eine Entfernung zum nächsten Wegpunkt besteht
+    {
+        float distanceToWayPoint = Vector3.Distance(transform.position, GetCurrentWaypoint());
+        return distanceToWayPoint < waypointTolerance;
+    }
+
+    private void CycleWaypoint()    //Guckt nach ob es einen nächsten Wegpunkt gibt und welcher dieser ist (Index)
+    {
+        currentWaypointIndex = enemyPath.GetNextIndex(currentWaypointIndex);
+    }
+
+    private Vector3 GetCurrentWaypoint() //Fragt in PatrolPath.cs nach wo sich der aktuell anzusteuernde Wegpunkt befindet (Position)
+    {
+        return enemyPath.GetWaypoint(currentWaypointIndex);
+    }
+
     void nearHero()
     {
         agent.SetDestination(player.transform.position);    //muss durch das selbe wie in update ersetzt werden nur in schneller? damit sie rennen?
@@ -127,11 +132,9 @@ public class Enemy : MonoBehaviour
         {
             animator.SetBool("attack", true);
             if (countdown > beatTime)
-            {
-                //Debug.Log("Stirb Held");           
+            {      
                 dataStorage.playerHp -= damage;
                 FindObjectOfType<AudioManager>().Play("HeroHurtFX");
-                //player.transform.position += Vector3.up;    //an dieser Stelle die Schadens animation des Helden einfügen
                 countdown = 0;
             }
         } else
@@ -154,14 +157,6 @@ public class Enemy : MonoBehaviour
         {
             playerCollision = false;
         }
-
-        if (collisionInfo.tag == "Enemy Path")
-        {
-            if (Vector3.Distance(this.transform.position, brucke.transform.position) > 10)
-            {
-                onTheRoad = false;
-            }
-        }
     }
 
     private void OnTriggerEnter(Collider collisionInfo)
@@ -170,7 +165,7 @@ public class Enemy : MonoBehaviour
         {
             if(dataStorage.hp <= damage)
             {
-                Destroy(col.gameObject);
+                Destroy(gameObject);
                 PlayerPrefs.SetInt("lastRound", dataStorage.welle);
                 if (PlayerPrefs.GetInt("HighScore") <= dataStorage.welle) {
                     PlayerPrefs.SetInt("HighScore", dataStorage.welle);
@@ -179,23 +174,11 @@ public class Enemy : MonoBehaviour
                 SceneManager.LoadScene(2);
             } else
             {
-                Destroy(col.gameObject);
+                Destroy(gameObject);
                 dataStorage.hp -= 1;
                 FindObjectOfType<AudioManager>().Play("HouseDamageFX");
                 EnemySpawn.EnemyListe.Remove(this.gameObject);
-                Debug.Log("Aua");
             }            
-        }
-
-        if (collisionInfo.tag == "Enemy Path")
-        {
-            colTrigger.size = new Vector3(0.3f, 0.5f, 0.3f);
-            onTheRoad = true;
-        }
-
-        if (collisionInfo.name == "Wasserweg")
-        {
-            colTrigger.size = new Vector3(0.3f, 0.5f, 0.3f);
         }
     }
 

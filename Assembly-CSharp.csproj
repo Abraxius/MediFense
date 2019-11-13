@@ -80,6 +80,7 @@
     <Compile Include="Assets\Scripts\Enemy\Enemy.cs" />
     <Compile Include="Assets\Scripts\Enemy\Enemy_Golem.cs" />
     <Compile Include="Assets\Scripts\Enemy\EnemyBoss.cs" />
+    <Compile Include="Assets\Scripts\Enemy\EnemyPath.cs" />
     <Compile Include="Assets\Scripts\Enemy\EnemySpawn.cs" />
     <Compile Include="Assets\Scripts\Menu\GameOver.cs" />
     <Compile Include="Assets\Scripts\Menu\Menu.cs" />
