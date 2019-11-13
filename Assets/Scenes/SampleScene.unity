@@ -14543,7 +14543,7 @@ MonoBehaviour:
   m_Center: {x: 0, y: 2, z: 0}
   m_LayerMask:
     serializedVersion: 2
-    m_Bits: 35605
+    m_Bits: 35329
   m_UseGeometry: 0
   m_DefaultArea: 0
   m_IgnoreNavMeshAgent: 1
@@ -14553,7 +14553,7 @@ MonoBehaviour:
   m_OverrideVoxelSize: 0
   m_VoxelSize: 0.1
   m_BuildHeightMesh: 0
-  m_NavMeshData: {fileID: 23800000, guid: 7ab751a3306122249a4bb7a3147b216a, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: 98f3c09f70364ef46ad119efc2511bc5, type: 2}
 --- !u!4 &580728958
 Transform:
   m_ObjectHideFlags: 0
@@ -14586,7 +14586,7 @@ MonoBehaviour:
   m_Center: {x: 0, y: 2, z: 0}
   m_LayerMask:
     serializedVersion: 2
-    m_Bits: 512
+    m_Bits: 35329
   m_UseGeometry: 0
   m_DefaultArea: 0
   m_IgnoreNavMeshAgent: 1
@@ -14594,9 +14594,9 @@ MonoBehaviour:
   m_OverrideTileSize: 0
   m_TileSize: 256
   m_OverrideVoxelSize: 0
-  m_VoxelSize: 0.16666667
+  m_VoxelSize: 0.4
   m_BuildHeightMesh: 0
-  m_NavMeshData: {fileID: 23800000, guid: 2a7051b2e9932d64abcad1b9f6d80e6a, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: 6c0bf1d8098790c4e9f46d9ef5905ac2, type: 2}
 --- !u!114 &580728960
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14615,7 +14615,7 @@ MonoBehaviour:
   m_Center: {x: 0, y: 2, z: 0}
   m_LayerMask:
     serializedVersion: 2
-    m_Bits: 512
+    m_Bits: 35329
   m_UseGeometry: 0
   m_DefaultArea: 0
   m_IgnoreNavMeshAgent: 1
@@ -14623,9 +14623,9 @@ MonoBehaviour:
   m_OverrideTileSize: 0
   m_TileSize: 256
   m_OverrideVoxelSize: 0
-  m_VoxelSize: 0.016666668
+  m_VoxelSize: 0.1
   m_BuildHeightMesh: 0
-  m_NavMeshData: {fileID: 23800000, guid: d8a61922f4b0ddf4b851d98cbe322d24, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: 4acb74451b2461e40a0c4a9179d712ef, type: 2}
 --- !u!1001 &580729655
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -17058,7 +17058,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 2.2e-44, y: 1e-45, z: 1.7e-43, w: 0}
+  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
@@ -43550,9 +43550,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7eab2f15073a4984996445c4a26cc3ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Enemy: {fileID: 3035743221572770156, guid: f2fb06095eb134c4a89c49791789e6b0, type: 3}
-  Enemy2: {fileID: 5219293129375267572, guid: 5e30f488305b1cc408c315a40b86faee, type: 3}
-  EnemyBoss: {fileID: 3035743221572770156, guid: 504543a22ab0a6146b9e17c55d918a22,
+  Enemy: {fileID: 4197768192768906103, guid: 9204e5296de16284b832d8eb56c0c53b, type: 3}
+  Enemy2: {fileID: 1749706950121433881, guid: 50514c57225c8614fbfd506985385bf3, type: 3}
+  EnemyBoss: {fileID: 1130928088680130703, guid: 72a675347ecf2fe4b90cfc922f99984a,
     type: 3}
   EnemyBoss2: {fileID: 0}
   spawnAnzahl: 2

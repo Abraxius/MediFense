@@ -29,13 +29,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3035743221572770156}
-  m_LocalRotation: {x: 0, y: -0.90278435, z: 0, w: 0.43009356}
-  m_LocalPosition: {x: -24.13, y: 7.11, z: -41.4}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: -129.05301, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &3035743221572770150
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -119,7 +119,7 @@ NavMeshAgent:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3035743221572770156}
   m_Enabled: 1
-  m_AgentTypeID: 1479372276
+  m_AgentTypeID: 0
   m_Radius: 0.3
   m_Speed: 3
   m_Acceleration: 8
@@ -148,11 +148,13 @@ MonoBehaviour:
   enemyPath: {fileID: 4608933299390756016, guid: b7554d5912d2244438117f202a740101,
     type: 3}
   waypointTolerance: 1
+  boss: 0
   agent: {fileID: 3035743221572770146}
-  beatTime: 5
+  enemyHp: 10
   damage: 2
+  baseDamage: 0
+  beatTime: 5
   countdown: 0
   playerCollision: 0
-  enemyHp: 10
   startetEnemyHP: 0
   sterben: 0

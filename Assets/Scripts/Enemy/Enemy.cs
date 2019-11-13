@@ -13,6 +13,8 @@ public class Enemy : MonoBehaviour
     Vector3 guardPosition;
     int currentWaypointIndex = 0;
 
+    [SerializeField] bool boss = false; //Ist es ein Boss?
+
     public NavMeshAgent agent;
 
     private EnemySpawn EnemySpawn;
@@ -22,13 +24,16 @@ public class Enemy : MonoBehaviour
     Animator animator;
     const float locomotionAnimationSmoothTime = .1f;
 
-    public float beatTime;  //Die Zeit zwischen denen beim Schlagen des Enemys pause ist
+    public int enemyHp;
     public int damage;       //Der Schaden den der Enemy verursacht
+    public int baseDamage;  //Der Schaden der am Haupthaus verursacht wird
+    public float beatTime;  //Die Zeit zwischen denen beim Schlagen des Enemys pause ist
+
 
     [HideInInspector] public float countdown;
     [HideInInspector] public bool playerCollision;
 
-    public int enemyHp;
+
     [HideInInspector] public int startetEnemyHP;
 
     [HideInInspector] public bool sterben;
@@ -175,7 +180,7 @@ public class Enemy : MonoBehaviour
             } else
             {
                 Destroy(gameObject);
-                dataStorage.hp -= 1;
+                dataStorage.hp -= baseDamage;
                 FindObjectOfType<AudioManager>().Play("HouseDamageFX");
                 EnemySpawn.EnemyListe.Remove(this.gameObject);
             }            
@@ -203,7 +208,15 @@ public class Enemy : MonoBehaviour
             {
                 if (animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 2)
                 {
-                    dataStorage.money += dataStorage.enemyLoot;
+                    if (boss)
+                    {
+                        dataStorage.gen += dataStorage.enemyBossLoot;
+                    }
+                    else
+                    {
+                        dataStorage.money += dataStorage.enemyLoot;
+                    }
+
                     animator.SetBool("death", false);
                     EnemySpawn.EnemyListe.Remove(this.gameObject);
                     Destroy(this.gameObject);

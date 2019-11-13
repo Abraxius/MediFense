@@ -7,12 +7,12 @@ public class HPLeisteEnemy2 : MonoBehaviour
 {
     private Image healthBar;
     private Datenspeicherung dataStorage;
-    private Enemy_Golem enemyScript;
+    private Enemy enemyScript;
 
     // Start is called before the first frame update
     void Start()
     {
-        enemyScript = transform.parent.parent.gameObject.GetComponent<Enemy_Golem>();
+        enemyScript = transform.parent.parent.gameObject.GetComponent<Enemy>();
         healthBar = transform.GetChild(0).GetChild(0).gameObject.GetComponent<Image>();
         dataStorage = GameObject.Find("Player").GetComponent<Datenspeicherung>();
     }
